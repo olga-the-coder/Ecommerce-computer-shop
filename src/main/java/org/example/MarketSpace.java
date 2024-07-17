@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +18,8 @@ public class MarketSpace {
 
     //private constructor to make sure we can only create instance inside this class
     private MarketSpace() {
-        loadProducts("/Users/olga/IdeaProjects/EcommerceComputerShop/src/main/java/org/example/products.csv");
+        //loadProducts("/Users/olga/IdeaProjects/EcommerceComputerShop/src/main/resources/products.csv");
+        loadDB();
     }
 
     public static MarketSpace getInstance() {
@@ -71,6 +73,16 @@ public class MarketSpace {
             System.out.println("File not found: " + fname);
         }
     }
+
+    public void loadDB() {
+        ProductDAO dao = new ProductDAO();
+        try{
+            this.products = dao.readAll();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public String getCart() {
         if (cart.size() == 0) {
             return "\nNo items.";
