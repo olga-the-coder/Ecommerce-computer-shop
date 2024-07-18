@@ -1,10 +1,7 @@
 package org.example;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +12,25 @@ public class ProductDAO {
         this.datasource = DataSourceFactory.getInstance().getDataSource();
     }
 
+    public void create (Product product) throws SQLException{
+        String query = "INSERT INTO product(name, price, quantity, image) VALUES (?, ?, ?, ?)";
+
+        Connection conn = datasource.getConnection();
+        PreparedStatement stat = conn.prepareStatement(query);
+        stat.setString(1, product.getDescription());
+        stat.setDouble(2, product.getPrice());
+        stat.setInt(3, product.getQuantity());
+        stat.setString(4, product.getImg());
+        stat.executeUpdate();
+
+        conn.close();
+    }
+
     public List<Product> readAll() throws SQLException{
         List<Product> products = new ArrayList<>();
-        Connection conn = null;
         String query = "SELECT * FROM product";
 
+        Connection conn = null;
         conn = datasource.getConnection();
         Statement stat = conn.createStatement();
         //DataSourceFactory.getInstance().getDataSource();

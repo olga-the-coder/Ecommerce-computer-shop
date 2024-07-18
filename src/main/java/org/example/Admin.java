@@ -6,10 +6,13 @@ import java.util.Scanner;
 public class Admin {
     private static Admin instance = new Admin();
     private Scanner sc;
+    private ProductService service;
 
     private Admin() {
         sc = new Scanner(System.in);
+        service = new ProductService();
     }
+
     public static Admin instance() {
         return instance;
     }
@@ -19,6 +22,12 @@ public class Admin {
             menu();
             int c = sc.nextInt();
             switch(c) {
+                case 1:
+                   create();
+                   break;
+                case 5:
+                    all();
+                    break;
                 case 6:
                     return;
             }
@@ -41,4 +50,16 @@ public class Admin {
         System.out.println("\n*** Product Admin ***");
         Arrays.stream(adminMenu).forEach(System.out::println); // functional programming
     }
+
+    private void create() {
+        Product product = new Product("new product", 9.99, 100, "new image");
+        service.create(product);
+    }
+
+    private void all() {
+        for (Product product: service.getProducts()) {
+            System.out.println(product);
+        }
+    }
+
 }

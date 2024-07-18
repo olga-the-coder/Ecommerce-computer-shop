@@ -8,9 +8,11 @@ public class Product {
     private String img;
 
     public Product (int id, String description, double price) {
-        this.id = id;
-        this.description = description;
-        this.price = price;
+        this(id, description, price, 0, "");
+    }
+
+    public Product (String description, double price, int quantity, String img) {
+        this(0, description, price, quantity, img);
     }
 
     public Product (int id, String description, double price, int quantity, String img) {
@@ -43,6 +45,22 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setPrice(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getImg() {
+        return this.img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
