@@ -31,6 +31,7 @@ public class Admin {
                 case 6:
                     return;
             }
+            sc.nextLine(); //consume \n
         }
     }
 
@@ -52,7 +53,29 @@ public class Admin {
     }
 
     private void create() {
-        Product product = new Product("new product", 9.99, 100, "new image");
+        /*System.out.println("Please enter product description");
+        String desc = sc.nextLine();
+        sc.next();
+        System.out.println("Please enter product price");
+        sc.next();
+        double price = sc.nextDouble();
+        System.out.println("Please enter product quantity");
+        int quantity = sc.nextInt();
+        System.out.println("Please enter product image");
+        String img = sc.nextLine();
+        Product product = new Product(desc, price, quantity, img);
+        service.create(product); */
+
+        System.out.print("Please enter product description: ");
+        sc.nextLine();
+        String desc = sc.nextLine();
+        System.out.print("Please enter product price: ");
+        double price = sc.nextDouble();
+        System.out.print("Please enter product quantity: ");
+        int quantity = sc.nextInt();
+        System.out.print("Please enter product image: ");
+        String img = sc.nextLine();
+        Product product = new Product(desc, price, quantity, img);
         service.create(product);
     }
 
