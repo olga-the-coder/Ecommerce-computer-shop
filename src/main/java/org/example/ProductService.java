@@ -31,4 +31,22 @@ public class ProductService {
         return  products;
     }
 
+    public Product getProduct(int id) {
+        Product product = null;
+        try {
+            product = dao.read(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return product;
+    }
+
+    public  void deleteProduct(int id) {
+        try {
+            dao.delete(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

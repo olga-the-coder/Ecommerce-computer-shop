@@ -25,6 +25,12 @@ public class Admin {
                 case 1:
                    create();
                    break;
+                case 2:
+                    get();
+                    break;
+                case 4:
+                    delete();
+                    break;
                 case 5:
                     all();
                     break;
@@ -80,9 +86,27 @@ public class Admin {
     }
 
     private void all() {
-        for (Product product: service.getProducts()) {
+        /*for (Product product: service.getProducts()) {
             System.out.println(product);
-        }
+        } */
+
+        service.getProducts().forEach(System.out::println);
+    }
+
+    private void get() {
+        System.out.println("Which product would you like to get?");
+        int c =sc.nextInt();
+        /*for (Product product: service.getProducts()) {
+            System.out.println(product);
+        } */
+        System.out.println(service.getProduct(c));
+
+    }
+
+    public void delete() {
+        System.out.println("Which product would you like to delete?");
+        int c = sc.nextInt();
+        service.deleteProduct(c);
     }
 
 }

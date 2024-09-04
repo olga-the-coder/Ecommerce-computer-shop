@@ -12,7 +12,7 @@ public class ProductDAO {
         this.datasource = DataSourceFactory.getInstance().getDataSource();
     }
 
-    public void create (Product product) throws SQLException{
+    public void create(Product product) throws SQLException {
         String query = "INSERT INTO product(name, price, quantity, image) VALUES (?, ?, ?, ?)";
 
         Connection conn = datasource.getConnection();
@@ -26,7 +26,7 @@ public class ProductDAO {
         conn.close();
     }
 
-    public List<Product> readAll() throws SQLException{
+    public List<Product> readAll() throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
 
@@ -35,7 +35,7 @@ public class ProductDAO {
         Statement stat = conn.createStatement();
         //DataSourceFactory.getInstance().getDataSource();
         ResultSet rs = stat.executeQuery(query);
-        while(rs.next()) {
+        while (rs.next()) {
             Product product = new Product(rs.getInt(1), rs.getNString(2), rs.getDouble(3),
                     rs.getInt(4), rs.getNString(5));
             products.add(product);
@@ -43,6 +43,36 @@ public class ProductDAO {
         }
         conn.close();
         return products;
+    }
+
+    public Product read(int id) throws SQLException {
+        Product product = null;
+        String query = "SELECT * FROM product WHERE id=" + id;
+
+        Connection conn = null;
+        conn = datasource.getConnection();
+        Statement stat = conn.createStatement();
+        ResultSet rs = stat.executeQuery(query);
+
+        if (rs.next()) {
+            product = new Product(rs.getInt(1), rs.getNString(2), rs.getDouble(3), rs.getInt(4),
+                    rs.getNString(5));
+        }
+        conn.close();
+        return product;
+    }
+
+    public void delete(int id) throws SQLException {
+        Product product = null;
+        String query = "DELETE FROM product WHERE id=" + id;
+
+        Connection conn = null;
+
+        conn = datasource.getConnection();
+        Statement stat = conn.createStatement();
+        stat.executeUpdate(query);
+
+        conn.close();
     }
 }
 
