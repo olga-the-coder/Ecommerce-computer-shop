@@ -51,6 +51,10 @@ public class Product {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public void setPrice(int quantity) {
         this.quantity = quantity;
     }
@@ -65,6 +69,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return this.id + ": " + this.description + " " + this.price;
+        return this.id + ": " + this.description + " " + this.price + " " + this.img;
     }
 }

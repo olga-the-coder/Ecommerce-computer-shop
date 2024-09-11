@@ -66,11 +66,25 @@ public class ProductDAO {
         Product product = null;
         String query = "DELETE FROM product WHERE id=" + id;
 
-        Connection conn = null;
-
-        conn = datasource.getConnection();
+        Connection conn = datasource.getConnection();
         Statement stat = conn.createStatement();
         stat.executeUpdate(query);
+
+        conn.close();
+    }
+
+    public void update (Product product) throws SQLException {
+        String query = "UPDATE product SET name = ?, price = ?, quantity =?, image = ? WHERE id = ?";
+
+        Connection conn = datasource.getConnection();
+
+        PreparedStatement stat = conn.prepareStatement(query);
+        stat.setString(1, product.getDescription());
+        stat.setDouble(2, product.getPrice());
+        stat.setInt(3, product.getQuantity());
+        stat.setString(4, product.getImg());
+        stat.setInt(5, product.getId());
+        stat.executeUpdate();
 
         conn.close();
     }

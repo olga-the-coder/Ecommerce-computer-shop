@@ -49,4 +49,12 @@ public class ProductService {
         }
     }
 
+    public  void updateProduct(Product product) {
+        try {
+            dao.update(product);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
