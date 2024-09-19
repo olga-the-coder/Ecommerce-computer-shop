@@ -1,4 +1,6 @@
-package org.example;
+package org.example.console;
+
+import org.example.app.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,10 +39,10 @@ public class MarketSpace {
             for (Product product: products) {
                 System.out.println(product);
             }
-            System.out.println(size + ":Done");
+            System.out.println(-1 + ":Done");
 
             c = sc.nextInt();
-            if (c == size)
+            if (c == -1)
                 break;
             else if (c < 1 || c > size) {
                 System.out.println("Invalid input: " + c);

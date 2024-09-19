@@ -1,4 +1,4 @@
-package org.example;
+package org.example.console;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -9,8 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean running = true;
 
-        while(true) {
+        while(running) {
             mainMenu();
             int c = sc.nextInt();
 
@@ -32,11 +33,12 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Goodbye");
-                    System.exit(0);
+                    running = false;
             }
         }
-
+        sc.close();
     }
+
 
     public static void mainMenu() {
         String[] mainMenu = {

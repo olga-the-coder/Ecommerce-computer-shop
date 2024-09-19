@@ -1,4 +1,4 @@
-package org.example;
+package org.example.app;
 
 public interface Computer {
     String getDescription();

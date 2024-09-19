@@ -1,4 +1,4 @@
-package org.example;
+package org.example.app;
 
 public class Product {
     private int id;

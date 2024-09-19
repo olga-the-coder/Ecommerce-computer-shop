@@ -1,4 +1,4 @@
-package org.example;
+package org.example.app;
 
 public class ComputerComponent extends ComputerDecorator {
     private String description;

@@ -1,4 +1,7 @@
-package org.example;
+package org.example.console;
+
+import org.example.app.Product;
+import org.example.app.ProductService;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -115,8 +118,9 @@ public class Admin {
     public void update() {
         String str;
 
-        System.out.println("Which product would you like to update?");
+        System.out.print("Which product would you like to update?");
         int id = sc.nextInt();
+        sc.nextLine();
         Product product = service.getProduct(id);
         System.out.println(product);
         System.out.println("--------------");
@@ -148,7 +152,7 @@ public class Admin {
         }
 
         System.out.print("Please enter up-to-date product image: ");
-        String img = sc.next();
+        String img = sc.nextLine();
         if (!(img.isEmpty())) {
             product.setImg(img);
         }
