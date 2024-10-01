@@ -86,8 +86,9 @@ public class Admin {
         System.out.print("Please enter product quantity: ");
         int quantity = sc.nextInt();
         System.out.print("Please enter product image: ");
-        String img = sc.nextLine();
+        String img = sc.next();
         Product product = new Product(desc, price, quantity, img);
+        //System.out.println(product);
         service.create(product);
     }
 
