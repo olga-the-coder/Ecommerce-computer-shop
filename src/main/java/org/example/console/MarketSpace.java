@@ -4,14 +4,12 @@ import org.example.app.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class MarketSpace {
     private static MarketSpace instance = new MarketSpace();
-    private List<Product> products = new ArrayList<>();
+    private Map<Integer, Product> products;
     private List<Computer> cart = new ArrayList<>();
     private SortStrategy strategy;
     private static SortStrategy sortByOrderIDStrategy = new SortByOrderID();
@@ -19,6 +17,7 @@ public class MarketSpace {
 
     //private constructor to make sure we can only create instance inside this class
     private MarketSpace() {
+        products = new HashMap<>();
         //loadProducts("/Users/olga/IdeaProjects/EcommerceComputerShop/src/main/resources/products.csv");
         loadProducts();
     }
@@ -32,24 +31,21 @@ public class MarketSpace {
 
         Scanner sc = new Scanner(System.in);
         int c;
-        int size = products.size() + 1;
         while(true) {
             System.out.printf("\nCurrent Build: %s, and total price is %.1f\n", computer.getDescription(), computer.getPrice());
             System.out.println("What component would you like to add?");
-            for (Product product: products) {
-                System.out.println(product);
-            }
-            System.out.println(-1 + ":Done");
+            menu();
+            //System.out.println(-1 + ":Done");
 
             c = sc.nextInt();
             if (c == -1)
                 break;
-            else if (c < 1 || c > size) {
+            else if (!products.containsKey(c)) {
                 System.out.println("Invalid input: " + c);
                 continue;
             }
 
-            Product product = products.get(c - 1);
+            Product product = products.get(c);
             //Decorator
             computer = new ComputerComponent(computer, product.getDescription(), product.getPrice());
         }
@@ -57,7 +53,7 @@ public class MarketSpace {
     }
 
 
-    public void loadProducts(String fname) {
+   /* public void loadProducts(String fname) {
         try {
             File file = new File(fname);
             Scanner sc = new Scanner(file);
@@ -73,11 +69,12 @@ public class MarketSpace {
         } catch (FileNotFoundException ex) {
             System.out.println("File not found: " + fname);
         }
-    }
+    } */
 
     public void loadProducts() {
         ProductService service = new ProductService();
-            this.products = service.getProducts();
+        for (Product product: service.getProducts() )
+            this.products.put(product.getId(), product);
     }
 
     public String getCart() {
@@ -108,5 +105,10 @@ public class MarketSpace {
         }
 
         strategy.sort(cart);
+    }
+
+    private void menu() {
+        products.forEach((k, v) -> System.out.println(v));
+        System.out.println(-1 + ":Done");
     }
 }
