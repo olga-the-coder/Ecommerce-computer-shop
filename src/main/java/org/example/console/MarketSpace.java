@@ -38,7 +38,7 @@ public class MarketSpace {
             //System.out.println(-1 + ":Done");
 
             c = sc.nextInt();
-            if (c == -1)
+            if (c == 0)
                 break;
             else if (!products.containsKey(c)) {
                 System.out.println("Invalid input: " + c);
@@ -46,8 +46,15 @@ public class MarketSpace {
             }
 
             Product product = products.get(c);
-            //Decorator
-            computer = new ComputerComponent(computer, product.getDescription(), product.getPrice());
+
+            if (product.getQuantity() > 0) {
+                //Decorator
+                computer = new ComputerComponent(computer, product.getDescription(), product.getPrice());
+                product.setQuantity(product.getQuantity() - 1);
+            } else {
+                System.out.println(product.getDescription() + " is out of stock! Please order different product!");
+            }
+
         }
         cart.add(computer);
     }
@@ -109,6 +116,7 @@ public class MarketSpace {
 
     private void menu() {
         products.forEach((k, v) -> System.out.println(v));
-        System.out.println(-1 + ":Done");
+        System.out.println(0 + ":Done");
+        System.out.println(-1 + ":Cancel");
     }
 }
