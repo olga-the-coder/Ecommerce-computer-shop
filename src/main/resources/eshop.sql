@@ -36,3 +36,5 @@ INSERT INTO product(name, price, quantity, image) VALUES ("Monitor", 325.2, 10, 
 INSERT INTO product(name, price, quantity, image) VALUES ("Mouse", 38.99, 10, "images/mouse.jpg");
 INSERT INTO product(name, price, quantity, image) VALUES ("Speaker", 109.31, 10, "images/speaker.jpg");
 INSERT INTO product(name, price, quantity, image) VALUES ("USB HD camera", 205.49, 10, "images/usb.jpg");
+
+INSERT INTO productOrder VALUES("001", "Test order", 1099.9, NOW())

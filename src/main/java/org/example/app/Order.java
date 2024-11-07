@@ -6,12 +6,12 @@ import java.util.List;
 public class Order {
     private String id;
     private String description;
-    private double total;
+    private float total;
     private LocalDateTime dateTime;
     List<Product> products;
 
 
-    public Order(String id, String description, double total, LocalDateTime dateTime, List<Product> products) {
+    public Order(String id, String description, float total, LocalDateTime dateTime, List<Product> products) {
         this.id = id;
         this.description = description;
         this.total = total;
@@ -35,11 +35,11 @@ public class Order {
         this.description = description;
     }
 
-    public double getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 

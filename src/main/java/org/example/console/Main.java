@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     private static MarketSpace marketSpace = MarketSpace.getInstance();
     private static Admin admin = Admin.instance();
+    private static OMS oms = OMS.instance();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -32,6 +33,9 @@ public class Main {
                     admin.admin();
                     break;
                 case 6:
+                    oms.admin();
+                    break;
+                case 7:
                     System.out.println("Goodbye");
                     running = false;
             }
@@ -48,7 +52,8 @@ public class Main {
                 "3: Sort by order ID (Descending order)",
                 "4: Sort by order price (Descending order)",
                 "5: Product Admin",
-                "6: Quit"
+                "6: Order Management",
+                "7: Quit"
         };
 
         //for (String menu: mainMenu) {
