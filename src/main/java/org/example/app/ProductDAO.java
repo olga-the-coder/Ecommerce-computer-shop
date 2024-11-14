@@ -30,8 +30,7 @@ public class ProductDAO {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
 
-        Connection conn = null;
-        conn = datasource.getConnection();
+        Connection conn = datasource.getConnection();
         Statement stat = conn.createStatement();
         //DataSourceFactory.getInstance().getDataSource();
         ResultSet rs = stat.executeQuery(query);

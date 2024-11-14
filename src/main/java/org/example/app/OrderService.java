@@ -18,29 +18,29 @@ public class OrderService {
             ex.printStackTrace();
         }
     }
-/*
-    public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+
+    public List<Order> getOrders() {
+        List<Order> orders = new ArrayList<>();
 
         try {
-            products = dao.readAll();
+            orders = dao.readAll();
         } catch (SQLException ex){
             ex.printStackTrace();
         }
 
-        return  products;
+        return  orders;
     }
 
-    public Product getProduct(int id) {
-        Product product = null;
+    public Order getOrder(String id) {
+        Order order = null;
         try {
-            product = dao.read(id);
+            order = dao.read(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return product;
+        return order;
     }
-
+/*
     public  void deleteProduct(int id) {
         try {
             dao.delete(id);

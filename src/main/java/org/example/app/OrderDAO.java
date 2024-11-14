@@ -1,10 +1,9 @@
 package org.example.app;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private DataSource datasource;
@@ -26,4 +25,39 @@ public class OrderDAO {
 
         conn.close();
     }
+
+    public List<Order> readAll() throws SQLException {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM productOrder";
+
+        Connection conn = datasource.getConnection();
+        Statement stat = conn.createStatement();
+        //DataSourceFactory.getInstance().getDataSource();
+        ResultSet rs = stat.executeQuery(query);
+        while (rs.next()) {
+            Order order = new Order(rs.getString(1), rs.getNString(2), rs.getFloat(3),
+                    rs.getTimestamp(4).toLocalDateTime(), new ArrayList<Product>());
+            orders.add(order);
+            //System.out.println(rs.getString(2));
+        }
+        conn.close();
+        return orders;
+    }
+
+    public Order read(String id) throws SQLException {
+        Order order = null;
+        String query = "SELECT * FROM productOrder WHERE id='" + id + "'";
+
+        Connection conn = datasource.getConnection();
+        Statement stat = conn.createStatement();
+        ResultSet rs = stat.executeQuery(query);
+
+        if (rs.next())
+            order = new Order(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getTimestamp(4).toLocalDateTime(),
+                    new ArrayList<Product>());
+
+        conn.close();
+        return order;
+    }
+
 }

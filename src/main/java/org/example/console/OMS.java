@@ -29,20 +29,21 @@ public class OMS {
                 case 1:
                    create();
                    break;
-                   /*
+
                 case 2:
                     get();
                     break;
+                     /*
                 case 3:
                     update();
                     break;
                 case 4:
                     delete();
                     break;
+                    */
                 case 5:
                     all();
                     break;
-                    */
                 case 6:
                     return;
             }
@@ -78,39 +79,19 @@ public class OMS {
         float total = sc.nextFloat();
         Order order = new Order(id, desc, total, LocalDateTime.now(), new ArrayList<Product>());
         service.create(order);
-/*
-        System.out.print("Please enter product description: ");
-        sc.nextLine();
-        String desc = sc.nextLine();
-        System.out.print("Please enter product price: ");
-        double price = sc.nextDouble();
-        System.out.print("Please enter product quantity: ");
-        int quantity = sc.nextInt();
-        System.out.print("Please enter product image: ");
-        String img = sc.next();
-        Product product = new Product(desc, price, quantity, img);
-        //System.out.println(product);
-        service.create(product);
     }
 
     private void all() {
-        //for (Product product: service.getProducts()) {
-            System.out.println(product);
-        } //
-
-        service.getProducts().forEach(System.out::println);
+        service.getOrders().forEach(System.out::println);
     }
 
     private void get() {
-        System.out.println("Which product would you like to get?");
-        int c =sc.nextInt();
-        //for (Product product: service.getProducts()) {
-            System.out.println(product);
-        } //
-        System.out.println(service.getProduct(c));
+        System.out.println("Which order would you like to get?");
+        String c = sc.nextLine();
+        System.out.println(service.getOrder(c));
 
     }
-
+/*
     public void delete() {
         System.out.println("Which product would you like to delete?");
         int c = sc.nextInt();
@@ -165,4 +146,4 @@ public class OMS {
     }
     */
     }
-}
+
