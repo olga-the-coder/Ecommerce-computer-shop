@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     private static MarketSpace marketSpace = MarketSpace.getInstance();
+    private static ShoppingCart cart = ShoppingCart.getInstance();
     private static Admin admin = Admin.instance();
     private static OMS oms = OMS.instance();
 
@@ -21,21 +22,15 @@ public class Main {
                     marketSpace.buyComputer();
                     break;
                 case 2:
-                    System.out.println(marketSpace.getCart());
+                    cart.admin();
                     break;
                 case 3:
-                    marketSpace.sort("ID");
-                    break;
-                case 4:
-                    marketSpace.sort("PRICE");
-                    break;
-                case 5:
                     admin.admin();
                     break;
-                case 6:
+                case 4:
                     oms.admin();
                     break;
-                case 7:
+                case 5:
                     System.out.println("Goodbye");
                     running = false;
             }
@@ -48,12 +43,10 @@ public class Main {
         String[] mainMenu = {
                 "Hi, what would you like to do?",
                 "1: Buy a computer",
-                "2: See my shoping cart",
-                "3: Sort by order ID (Descending order)",
-                "4: Sort by order price (Descending order)",
-                "5: Product Admin",
-                "6: Order Management",
-                "7: Quit"
+                "2: Shopping cart",
+                "3: Product Admin",
+                "4: Order Management",
+                "5: Quit"
         };
 
         //for (String menu: mainMenu) {

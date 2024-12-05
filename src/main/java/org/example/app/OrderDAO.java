@@ -60,4 +60,35 @@ public class OrderDAO {
         return order;
     }
 
+    public int update (Order order) throws SQLException {
+        String query = "UPDATE productOrder SET description = ?, total = ?, date_time =? WHERE id = ?";
+        int rows = 0;
+
+        Connection conn = datasource.getConnection();
+
+        PreparedStatement stat = conn.prepareStatement(query);
+        stat.setString(1, order.getDescription());
+        stat.setFloat(2, order.getTotal());
+        stat.setTimestamp(3, Timestamp.valueOf(order.getDateTime()));
+        stat.setString(4, order.getId());
+        rows = stat.executeUpdate();
+
+        conn.close();
+
+        return rows;
+    }
+
+    public int delete(String id) throws SQLException {
+        Connection conn = datasource.getConnection();
+        int rows = 0;
+
+        String query = "DELETE FROM productOrder WHERE id='" + id + "'";
+
+        Statement stat = conn.createStatement();
+        rows = stat.executeUpdate(query);
+
+        conn.close();
+        return rows;
+    }
+
 }

@@ -40,21 +40,26 @@ public class OrderService {
         }
         return order;
     }
-/*
-    public  void deleteProduct(int id) {
+
+    public  int deleteOrder(String id) {
+        int rows = 0;
         try {
-            dao.delete(id);
+            rows = dao.delete(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
+        return rows;
     }
 
-    public  void updateProduct(Product product) {
+    public  int update(Order order) {
+        int rows = 0;
         try {
-            dao.update(product);
+            rows = dao.update(order);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return rows;
     }
-*/
+
 }
