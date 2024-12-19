@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     private static MarketSpace marketSpace = MarketSpace.getInstance();
-    private static ShoppingCart cart = ShoppingCart.getInstance();
+    private static ShoppingCart cart = new ShoppingCart(marketSpace.getCart());
     private static Admin admin = Admin.instance();
     private static OMS oms = OMS.instance();
 

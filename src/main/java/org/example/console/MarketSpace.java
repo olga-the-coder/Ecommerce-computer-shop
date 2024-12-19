@@ -11,9 +11,6 @@ public class MarketSpace {
     private static MarketSpace instance = new MarketSpace();
     private Map<Integer, Product> products;
     private List<Computer> cart = new ArrayList<>();
-    private SortStrategy strategy;
-    private static SortStrategy sortByOrderIDStrategy = new SortByOrderID();
-    private static SortStrategy sortByPriceStrategy = new SortByPrice();
 
     //private constructor to make sure we can only create instance inside this class
     private MarketSpace() {
@@ -84,34 +81,8 @@ public class MarketSpace {
             this.products.put(product.getId(), product);
     }
 
-    public String getCart() {
-        if (cart.size() == 0) {
-            return "\nNo items.";
-        }
-        String cartStr = "[", comma;
-        for (int i = 0; i < cart.size(); i++) {
-            Computer computer = cart.get(i);
-            comma = i == cart.size() - 1 ? "":",";
-            cartStr += String.format("OrderID@%s: %s $%.2f", computer.getOrderID(), computer.getDescription(), computer.getPrice()) + comma;
-        }
-        cartStr += "]";
-
-        return cartStr;
-    }
-
-    public void sort(String s) {
-        if (this.cart.isEmpty()) {
-            System.out.println("\nNo items.");
-            return;
-        }
-
-        if (s.equals("ID")) {
-            this.strategy = sortByOrderIDStrategy;
-        } else if (s.equals("PRICE")) {
-            this.strategy = sortByPriceStrategy;
-        }
-
-        strategy.sort(cart);
+    public List<Computer> getCart() {
+        return cart;
     }
 
     private void menu() {
