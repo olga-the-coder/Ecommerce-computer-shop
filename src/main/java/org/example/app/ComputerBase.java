@@ -1,5 +1,7 @@
 package org.example.app;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -13,32 +15,48 @@ public class ComputerBase implements Computer {
     private String orderID;
     private String description;
     private double price;
+    private List<Product> components;
 
     public ComputerBase() {
-        this(getID(), NAME, PRICE);
+        this(getID(), NAME, PRICE, new ArrayList<Product>());
     }
-    public ComputerBase(String orderID, String description, double price) {
+    public ComputerBase(String orderID,String description, double price, List<Product> components) {
         this.orderID = orderID;
         this.description = description;
         this.price = price;
+        this.components = components;
     }
 
+    @Override
     public String getDescription() {
         return this.description;
     }
 
+    @Override
     public double getPrice() {
         return this.price;
     }
 
+    @Override
     public String getOrderID() {
         return this.orderID;
     }
 
     @Override
-    public String toString() {
-        return this.orderID + this.description + " " + this.price;
+    public List<Product> getComponents() {
+        return this.components;
     }
+
+    @Override
+    public String toString() {
+        return "ComputerBase{" +
+                "orderID='" + orderID + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", components=" + components +
+                '}';
+    }
+
 
     private static String getID() {
         return Integer.toString(ids.remove(0));

@@ -12,10 +12,13 @@ public class ComputerComponent extends ComputerDecorator {
         super(computer);
         this.description = description;
         this.price = price;
+
+        // TBC: handle components and quantity
     }
 
     @Override
     public String getDescription() {
+
         return super.getDescription() + " + " + this.description;
     }
 

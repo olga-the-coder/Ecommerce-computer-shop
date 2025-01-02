@@ -1,6 +1,7 @@
 package org.example.app;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -10,6 +11,10 @@ public class Order {
     private LocalDateTime dateTime;
     List<Product> products;
 
+
+    public Order(Computer computer) {
+        this(computer.getOrderID(), computer.getDescription(), (float) computer.getPrice(), LocalDateTime.now(), new ArrayList<Product>());
+    }
 
     public Order(String id, String description, float total, LocalDateTime dateTime, List<Product> products) {
         this.id = id;

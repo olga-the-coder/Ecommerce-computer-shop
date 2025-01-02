@@ -41,7 +41,7 @@ public class ShoppingCart {
                     sort("PRICE");
                     break;
                 case 4:
-                    // checkout
+                    checkOut();
                     break;
                 case 5:
                     return;
@@ -67,10 +67,9 @@ public class ShoppingCart {
     // create orders for the orders in the shopping cart
     public void checkOut() {
         for (Computer computer: cart) {
-       //    !!! //create order object of computer
-            service.create(null);
+            service.create(new Order(computer));
       }
-
+        cart.clear();
     }
 
     @Override
