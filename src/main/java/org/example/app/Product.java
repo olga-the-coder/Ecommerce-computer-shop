@@ -1,6 +1,6 @@
 package org.example.app;
 
-public class Product {
+public class Product implements Cloneable{
     private int id;
     private String description;
     private double price;
@@ -70,5 +70,17 @@ public class Product {
     @Override
     public String toString() {
         return this.id + ": " + this.description + " " + this.price + " " + this.quantity + " " + this.img;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override public boolean equals (Object obj) {
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+        return ((Product)obj).getId() == this.getId();
     }
 }

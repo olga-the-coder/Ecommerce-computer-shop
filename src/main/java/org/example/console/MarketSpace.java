@@ -46,7 +46,8 @@ public class MarketSpace {
 
             if (product.getQuantity() > 0) {
                 //Decorator
-                computer = new ComputerComponent(computer, product.getDescription(), product.getPrice());
+                //Product p = product.clone();
+                computer = new ComputerComponent(computer, product);
                 product.setQuantity(product.getQuantity() - 1);
             } else {
                 System.out.println(product.getDescription() + " is out of stock! Please order different product!");
@@ -54,6 +55,7 @@ public class MarketSpace {
 
         }
         cart.add(computer);
+        System.out.println((ComputerComponent) computer);
     }
 
 
