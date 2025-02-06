@@ -45,9 +45,15 @@ public class MarketSpace {
             Product product = products.get(c);
 
             if (product.getQuantity() > 0) {
-                //Decorator
-                //Product p = product.clone();
-                computer = new ComputerComponent(computer, product);
+                Product p = new Product();
+                try {
+                    p = (Product)product.clone();
+                    p.setQuantity(1);
+                } catch (CloneNotSupportedException ex) {
+                    ex.printStackTrace();
+                }
+
+                computer = new ComputerComponent(computer, p);
                 product.setQuantity(product.getQuantity() - 1);
             } else {
                 System.out.println(product.getDescription() + " is out of stock! Please order different product!");

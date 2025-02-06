@@ -12,18 +12,38 @@ public class OrderDAO {
         this.datasource = DataSourceFactory.getInstance().getDataSource();
     }
 
-    public void create(Order order) throws SQLException {
-        String query = "INSERT INTO productOrder VALUES (?, ?, ?, ?)";
+    public int create(Order order) throws SQLException {
+        String query = "INSERT INTO productOrder VALUES(?, ?, ?, ?)";
+        String query2 = "INSERT INTO orderDetails VALUES(?, ?, ?)";
 
         Connection conn = datasource.getConnection();
+        int rows;
+
+        //Manage transaction
+        conn.setAutoCommit(false);
+
+        // insert into order table
+
         PreparedStatement stat = conn.prepareStatement(query);
         stat.setString(1, order.getId());
         stat.setString(2, order.getDescription());
         stat.setFloat(3, order.getTotal());
         stat.setTimestamp(4, Timestamp.valueOf(order.getDateTime()));
-        stat.executeUpdate();
+        rows = stat.executeUpdate();
 
+        // insert into orderDetails table
+        stat = conn.prepareStatement(query2);
+        for (Product product: order.getProducts()) {
+            stat.setString(1, order.getId());
+            stat.setInt(2, product.getId());
+            stat.setInt(3, product.getQuantity());
+            rows += stat.executeUpdate();
+        }
+
+        conn.commit();
         conn.close();
+
+        return rows;
     }
 
     public List<Order> readAll() throws SQLException {

@@ -7,6 +7,8 @@ public class Product implements Cloneable{
     private int quantity;
     private String img;
 
+    public Product() {}
+
     public Product (int id, String description, double price) {
         this(id, description, price, 0, "");
     }
@@ -73,7 +75,7 @@ public class Product implements Cloneable{
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 
