@@ -6,14 +6,25 @@ import java.util.List;
 
 public class OrderService {
     private OrderDAO dao;
+    private ProductDAO pdao;
 
     public OrderService() {
+
         dao = new OrderDAO();
+        pdao = new ProductDAO();
     }
 
     public void create(Order order) {
         try {
            dao.create(order);
+
+           // update product stock
+            Product stock;
+            for (Product p: order.getProducts()) {
+                stock = pdao.read(p.getId());
+                stock.setQuantity(stock.getQuantity() - p.getQuantity());
+                pdao.update(stock);
+            }
         } catch (SQLException ex){
             ex.printStackTrace();
         }

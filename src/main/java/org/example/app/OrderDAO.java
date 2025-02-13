@@ -40,7 +40,7 @@ public class OrderDAO {
             rows += stat.executeUpdate();
         }
 
-        conn.commit();
+        conn.commit(); // execute multiple requests in a single transaction
         conn.close();
 
         return rows;
