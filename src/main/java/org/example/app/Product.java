@@ -2,6 +2,7 @@ package org.example.app;
 
 public class Product implements Cloneable{
     private int id;
+    private String type;
     private String description;
     private double price;
     private int quantity;
@@ -18,7 +19,12 @@ public class Product implements Cloneable{
     }
 
     public Product (int id, String description, double price, int quantity, String img) {
+        this(0, "Component", description, price, quantity, img);
+    }
+
+    public Product(int id, String type, String description, double price, int quantity, String img) {
         this.id = id;
+        this.type = type;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
@@ -31,6 +37,14 @@ public class Product implements Cloneable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {

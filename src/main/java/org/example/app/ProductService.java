@@ -41,6 +41,19 @@ public class ProductService {
         return product;
     }
 
+    public Product getComputer() {
+        Product product = null;
+        try {
+            product = dao.readAll().stream()
+                    .filter(p -> p.getType().equals("Computer"))
+                    .findFirst().orElse(null);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return product;
+    }
+
+
     public  void deleteProduct(int id) {
         try {
             dao.delete(id);

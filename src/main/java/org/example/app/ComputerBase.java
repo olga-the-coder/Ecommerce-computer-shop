@@ -7,8 +7,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ComputerBase implements Computer {
-    public static final String NAME = "Default Computer";
-    public static final double PRICE = 700.0;
+    //public static final String NAME = "Default Computer";
+    //public static final double PRICE = 700.0;
     public static final int SIZE = 100;
     private static List<Integer> ids = new Random(). ints(1, SIZE + 1).distinct().limit(SIZE).boxed().collect(Collectors.toList());
 
@@ -18,9 +18,13 @@ public class ComputerBase implements Computer {
     private List<Product> components;
 
     public ComputerBase() {
-        this(getID(), NAME, PRICE, new ArrayList<Product>());
+        Product computer = new ProductService().getComputer();
+        this.orderID = getID();
+        this.description = computer.getDescription();
+        this.price = computer.getPrice();
+        this.components = new ArrayList<Product>();
     }
-    public ComputerBase(String orderID,String description, double price, List<Product> components) {
+    public ComputerBase(String orderID, String description, double price, List<Product> components) {
         this.orderID = orderID;
         this.description = description;
         this.price = price;
